@@ -1,3 +1,3 @@
 $.when(firstAction(), secondAction()).then(finalize).done(function(){
-    // arguments holds the result of the finalize function.
+    // arguments holds the result returned by the finalize function.
 });

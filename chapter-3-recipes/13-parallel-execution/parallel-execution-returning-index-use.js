@@ -1,11 +1,11 @@
-var fastest = fastestPromiseWithIndex(
-    redisLookupAvatar('joe'),
-    filesystemLookupAvatar('joe'),
-    getAvatarFromGravatar('joe@example.com'));
-
-fastest.done(function(index, avatar){
+var fastest = fastestPromiseWithIndex([
+    avatarFromRedis('joe'),
+    avatarFromFilesystem('joe'),
+    avatarFromGravatar('joe@example.com')
+])
+.then(function(index, avatar){
     if (index !== 0){
-        // The response was not from Redis. Add avatar info to Redis so
+        // The response was not from Redis. Add the avatar info to Redis so
         // we have it cached.
     }
 
@@ -15,4 +15,8 @@ fastest.done(function(index, avatar){
     }
 
     return avatar;
+});
+
+fastest.done(function(avatar){
+    // Use the avatar.
 });

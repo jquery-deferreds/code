@@ -1,4 +1,4 @@
-function(checkImmediately){
+function emptyPromise(checkImmediately){
     var deferred = $.Deferred();
     if (checkImmediately && inProgress.length === 0){
         return deferred.resolve().promise();

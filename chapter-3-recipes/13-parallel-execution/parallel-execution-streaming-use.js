@@ -1,6 +1,6 @@
-var fastest = delegateEventStream([redisLookupAvatar('joe'),
-                                   filesystemLookupAvatar('joe'),
-                                   getAvatarFromGravatar('joe@example.com')],
+var fastest = delegateEventStream([avatarFromRedis('joe'),
+                                   avatarFromFilesystem('joe'),
+                                   avatarFromGravatar('joe@example.com')],
                                   eventHandler);
 
 fastest.done(function(avatar){

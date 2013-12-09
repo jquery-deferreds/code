@@ -4,8 +4,8 @@ function controllablePromise(promise){
         unlessDeactivated = function(func){
             return function(){
                 if (deactivated === false){
-                    func.apply(deferred,
-                               Array.prototype.slice.call(arguments));
+                    return func.apply(deferred,
+                                      Array.prototype.slice.call(arguments));
                 }
                 return deferred;
             };
@@ -19,10 +19,7 @@ function controllablePromise(promise){
         notify = unlessDeactivated(deferred.notify),
         notifyWith = unlessDeactivated(deferred.notifyWith);
 
-    promise
-        .done(resolve)
-        .fail(reject)
-        .progress(notify);
+    promise.done(resolve).fail(reject).progress(notify);
 
     deferred.resolve = resolve;
     deferred.resolveWith = resolveWith;

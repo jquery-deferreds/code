@@ -31,18 +31,22 @@ function main(){
                 process.exit();
             }
         };
+
     makeRequest('add', [20, 15]).then(
         function(result){ console.log('20 + 15 = ', result); },
         function(error){ console.log('Oops!', error); }
     ).always(possiblyExit);
+
     makeRequest('subtract', [20, 15]).then(
         function(result){ console.log('20 - 15 = ', result); },
         function(error){ console.log('Oops!', error); }
     ).always(possiblyExit);
+
     makeRequest('multiply', [20, 15]).then(
         function(result){ console.log('20 * 15 = ', result); },
         function(error){ console.log('Oops!', error); }
     ).always(possiblyExit);
+
     makeRequest('divide', [20, 0]).then(
         function(result){ console.log('20 / 0 = ', result); },
         function(error){ console.log('Oops!', error); }

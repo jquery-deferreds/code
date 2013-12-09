@@ -1,10 +1,3 @@
-function log(message){
-    postMessage({
-        message: message,
-        type: 'log'
-    });
-}
-
 var METHODS = {
     add: function(callback, payload){
         callback({ result: payload[0] + payload[1] });
@@ -30,3 +23,10 @@ addEventListener('message', function(event){
         log("Attempt to call unknown method '" + job.method + "'.");
     }
 });
+
+function log(message){
+    postMessage({
+        message: message,
+        type: 'log'
+    });
+}

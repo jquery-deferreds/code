@@ -1,7 +1,7 @@
 function eventStream(promises){
     var i, deferred = $.Deferred(),
         firedCount = 0,
-        callProgress = function(index, type){
+        callNotify = function(index, type){
             return function(){
                 deferred.notify({
                     index: index,
@@ -20,9 +20,9 @@ function eventStream(promises){
 
     for (i = 0; i < promises.length; i++){
         promises[i]
-            .done(callProgress(i, 'resolve'))
-            .fail(callProgress(i, 'reject'))
-            .progress(callProgress(i, 'notify'));
+            .done(callNotify(i, 'resolve'))
+            .fail(callNotify(i, 'reject'))
+            .progress(callNotify(i, 'notify'));
     }
 
     return deferred.promise();

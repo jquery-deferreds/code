@@ -1,9 +1,8 @@
-var urls = ['http://google.com', 'http://yahoo.com', 'http://www.nytimes.com'];
-var promises = [];
-
-for (var i = 0; i < urls.length; i++){
-    promises.push($.ajax(urls[i]));
-}
+var promises = [
+    $.ajax('http://google.com'),
+    $.ajax('http://yahoo.com'),
+    $.ajax('http://www.nytimes.com')
+];
 
 // NOTE: DON'T DO THIS!
 $.when(promises).then(function(results){

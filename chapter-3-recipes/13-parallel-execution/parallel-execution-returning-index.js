@@ -1,4 +1,4 @@
-function fastestPromiseWithIndex( /* promises... */ ){
+function fastestPromiseWithIndex(promises){
     var deferred = $.Deferred(),
         makeDone = function(index){
             return function(result){
@@ -11,8 +11,8 @@ function fastestPromiseWithIndex( /* promises... */ ){
             };
         };
 
-    for (var i = 0; i < arguments.length; i++){
-        arguments[i].done(makeDone(i)).fail(makeFail(i));
+    for (var i = 0; i < promises.length; i++){
+        promises[i].done(makeDone(i)).fail(makeFail(i));
     }
 
     return deferred.promise();

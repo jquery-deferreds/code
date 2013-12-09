@@ -1,10 +1,11 @@
-var urls = ['http://google.com', 'http://yahoo.com', 'http://www.nytimes.com'];
-var deferreds = [];
+var promises = [
+    $.ajax('http://google.com'),
+    $.ajax('http://yahoo.com'),
+    $.ajax('http://www.nytimes.com')
+];
 
-for (var i = 0; i < urls.length; i++){
-    deferreds.push($.ajax(urls[i]));
-}
-
-$.when.apply($, deferreds).then(function(result1, result2, result3){
-    console.log('All URLs fetched.');
-});
+$.when.apply($, promises).then(
+    function(result1, result2, result3){
+        console.log('All URLs fetched.');
+    }
+);

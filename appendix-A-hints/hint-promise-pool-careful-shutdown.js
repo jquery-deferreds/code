@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     pool = createPromisePool(),
     shuttingDown = false,
-    shutDownResponses = [];
+    shutdownResponses = [];
 
 app.get('/', function(req, res){
     if (shuttingDown){
@@ -14,7 +14,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/shutdown', function(req, res){
-    shutDownResponses.push(res);
+    shutdownResponses.push(res);
 
     if (shuttingDown === false){
         shuttingDown = true;
@@ -23,8 +23,8 @@ app.get('/shutdown', function(req, res){
             pool.add(sendShutdownEmail());
             pool.add(flushLogs());
             pool.emptyPromise().done(function(){
-                for (var i = 0; i < shutDownResponses.length; i++){
-                    shutDownResponses[i].send(200);
+                for (var i = 0; i < shutdownResponses.length; i++){
+                    shutdownResponses[i].send(200);
                 }
                 process.exit(0);
             });

@@ -1,5 +1,5 @@
-function fastestPromiseWithIndex( /* promises... */ ){
-    var deferred = $.Deferred(),
+function fastestPromiseWithIndex(promiseInfo){
+    var item, deferred = $.Deferred(),
         makeDone = function(index){
             return function(result){
                 deferred.resolve(index, result);
@@ -11,12 +11,13 @@ function fastestPromiseWithIndex( /* promises... */ ){
             };
         };
 
-    for (var i = 0; i < arguments.length; i++){
-        if (arguments[i].promise && jQuery.isFunction(arguments[i].promise)){
-            arguments[i].done(makeDone(i)).fail(makeFail(i));
+    for (var i = 0; i < promiseInfo.length; i++){
+        item = promiseInfo[i];
+        if (item.promise && jQuery.isFunction(item.promise)){
+            item.promise().done(makeDone(i)).fail(makeFail(i));
         }
         else {
-            deferred.resolve(i, arguments[i]);
+            deferred.resolve(i, item);
             break;
         }
     }

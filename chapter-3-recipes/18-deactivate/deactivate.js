@@ -5,7 +5,7 @@ function deactivatablePromise(promise){
         unlessDeactivated = function(func){
             return function(value){
                 if (deactivated === false){
-                    func(value);
+                    return func(value);
                 }
             };
         };
