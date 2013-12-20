@@ -5,7 +5,7 @@ function controllablePromise(promise){
             return function(){
                 if (deactivated === false){
                     return func.apply(deferred,
-                                      Array.prototype.slice.call(arguments));
+                                      [].slice.call(arguments));
                 }
                 return deferred;
             };
